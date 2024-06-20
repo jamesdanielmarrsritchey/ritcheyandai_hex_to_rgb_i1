@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Example</title>
+</head>
+<body>
+<div id='output'>Click here to convert <span id='o1'>#111111</span>, and <span id='o2'>#111111</span>.</div>
+<script src="function.js"></script>
+<script>
+document.querySelector("#output").addEventListener("click", function() {
+    const element = document.querySelector("#o1");
+    if (element) {
+        const result = hexToRgb(element.innerHTML, true);
+        element.innerHTML = result;
+    }
+});
+document.querySelector("#output").addEventListener("click", function() {
+    const element = document.querySelector("#o2");
+    if (element) {
+        const result = hexToRgb(element.innerHTML, false);
+        element.innerHTML = result.toString();;
+    }
+});
+</script>
+</body>
+</html>

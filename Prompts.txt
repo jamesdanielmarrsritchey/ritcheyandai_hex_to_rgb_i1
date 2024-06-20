@@ -1,0 +1,53 @@
+jamesdanielmarrsritchey: Using Javascript, write a function which converts RGB colours to full HEX.
+
+GitHub Copilot: ```javascript
+function rgbToHex(r, g, b) {
+  // Convert each color component to a hexadecimal string
+  const toHex = (c) => {
+    const hex = c.toString(16);
+    return hex.length == 1 ? '0' + hex : hex;
+  };
+
+  // Combine the hex strings for red, green, and blue
+  return '#' + toHex(r) + toHex(g) + toHex(b);
+}
+```
+
+jamesdanielmarrsritchey: Instead of expecting the colour to be inputted as separate values, expect a string formatted as "rgb(#,#,#)".
+
+GitHub Copilot: ```javascript
+function rgbStringToHex(rgbString) {
+  // Extract the numeric values for red, green, and blue using regex
+  const [_, r, g, b] = rgbString.match(/rgb\((\d+),\s*(\d+),\s*(\d+)\)/);
+
+  // Convert each color component to a hexadecimal string
+  const toHex = (c) => {
+    const hex = parseInt(c).toString(16);
+    return hex.length == 1 ? '0' + hex : hex;
+  };
+
+  // Combine the hex strings for red, green, and blue
+  return '#' + toHex(r) + toHex(g) + toHex(b);
+}
+```
+
+jamesdanielmarrsritchey: Do the opposite now. Write a function which converts a full length Hex (which includes a #) to an RGB colour code. By default the function should return an array as "#,#,#' but the user should be able to choose to have it returned as a string formatted as "rgb(#,#,#)" if they prefer.
+
+GitHub Copilot: ```javascript
+function hexToRgb(hex, returnAsString = false) {
+  // Remove the '#' if it's there
+  hex = hex.replace(/^#/, '');
+
+  // Parse the hex values
+  const r = parseInt(hex.substring(0, 2), 16);
+  const g = parseInt(hex.substring(2, 4), 16);
+  const b = parseInt(hex.substring(4, 6), 16);
+
+  // Return as an array or a string based on the user's choice
+  if (returnAsString) {
+    return `rgb(${r},${g},${b})`;
+  } else {
+    return [r, g, b].join(',');
+  }
+}
+```
